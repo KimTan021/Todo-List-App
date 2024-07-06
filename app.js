@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const _ = require("lodash");
+require("dotenv").config();
 
 const app = express();
 
@@ -10,7 +11,7 @@ app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
-mongoose.connect("mongodb+srv://tankimemerson05:M1kn0sr3m3n4t12@cluster0.jsxdxft.mongodb.net/todolistDB");
+mongoose.connect(process.env.MONGO_URI);
 
 const itemsSchema = new mongoose.Schema({
   name: String,
@@ -117,6 +118,6 @@ app.get("/about", function (req, res) {
   res.render("about");
 });
 
-app.listen(3000, function () {
-  console.log("Server started on port 3000");
+app.listen(process.env.PORT || 3000, function () {
+  console.log("Server has started successfully.");
 });
