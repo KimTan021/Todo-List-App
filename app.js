@@ -112,7 +112,7 @@ app.post("/delete", async function (req, res) {
       { name: listName },
       { $pull: { items: { _id: checkedItemId } } }
     );
-    res.redirect("/" + listName);
+    res.redirect("/todo/" + listName);
   }
 });
 
