@@ -51,7 +51,7 @@ app.get("/", async function (req, res) {
   res.render("list", { listTitle: "Today", newListItems: items });
 });
 
-app.get("/:customListName", async function (req, res) {
+app.get("/todo/:customListName", async function (req, res) {
   const customListName = _.capitalize(req.params.customListName);
 
   const list = await List.findOne({ name: customListName });
@@ -68,7 +68,7 @@ app.get("/:customListName", async function (req, res) {
 
     await list.save();
 
-    res.redirect("/" + customListName);
+    res.redirect("/todo/" + customListName);
   }
 });
 
@@ -87,7 +87,7 @@ app.post("/", async function (req, res) {
     const list = await List.findOne({ name: listName });
     list.items.push(item);
     await list.save();
-    res.redirect("/" + listName);
+    res.redirect("/todo/" + listName);
   }
 });
 
